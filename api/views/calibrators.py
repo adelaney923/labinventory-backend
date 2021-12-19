@@ -35,7 +35,7 @@ class CalibratorView(APIView):
     def get(self, request, pk):
         calibrator = get_object_or_404(Calibrator, pk=pk)
         if request.user != calibrator.owner:
-            raise PermissionDenied('Unauthorized, you do not own this blog')
+            raise PermissionDenied('Unauthorized, you do not own this calibrator')
         data = CalibratorSerializer(calibrator).data
         return Response(data)
     

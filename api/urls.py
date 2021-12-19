@@ -1,6 +1,7 @@
 from django.urls import path
 from .views.users import SignUp, SignIn, SignOut, ChangePassword
 from .views.calibrators import CalibratorsView, CalibratorView
+from .views.consumables import ConsumablesView, ConsumableView
 
 urlpatterns = [
     path('sign-up/', SignUp.as_view(), name='sign-up'),
@@ -8,5 +9,7 @@ urlpatterns = [
     path('sign-out/', SignOut.as_view(), name='sign-out'),
     path('change-password/', ChangePassword.as_view(), name='change-password'),
     path('calibrators/', CalibratorsView.as_view(), name='calibrators'),
-    path('calibrators/<int:pk>', CalibratorView.as_view(), name='calibrator')
+    path('calibrators/<int:pk>', CalibratorView.as_view(), name='calibrator'),
+    path('consumables/', ConsumablesView.as_view(), name='consumables'),
+    path('consumables/<int:pk>', ConsumableView.as_view(), name='consumable')
 ]
