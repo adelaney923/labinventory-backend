@@ -9,6 +9,8 @@ djangorestframework = "*"
 psycopg2 = "*"
 pytz = "*"
 gunicorn = "*"
+django-environ = "*"
+whitenoise = "*"
 
 [dev-packages]
 
