@@ -11,6 +11,7 @@ pytz = "*"
 gunicorn = "*"
 django-environ = "*"
 whitenoise = "*"
+django-heroku = "*"
 
 [dev-packages]
 
