@@ -39,14 +39,14 @@ class ControlView(APIView):
         data = ControlSerializer(control).data
         return Response(data)
     
-    def patch(self, request, pk):
+    def put(self, request, pk):
         control = get_object_or_404(Control, pk=pk)
         # Check the mango's owner against the user making this request
         if request.user != control.owner:
             raise PermissionDenied('Unauthorized, you do not own this control')
         # Ensure the owner field is set to the current user's ID
         request.data['owner'] = request.user.id
-        updated_control = ControlSerializer(control, data=request.data, partial=True)
+        updated_control = ControlSerializer(control, data=request.data)
         if updated_control.is_valid():
             updated_control.save()
             return Response(updated_control.data)

@@ -63,7 +63,7 @@ class SignOut(generics.DestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ChangePassword(generics.UpdateAPIView):
-    def patch(self, request):
+    def put(self, request):
         user = request.user
         old_pw = request.data['passwords']['old']
         new_pw = request.data['passwords']['new']

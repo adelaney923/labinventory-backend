@@ -39,14 +39,14 @@ class ConsumableView(APIView):
         data = ConsumableSerializer(consumable).data
         return Response(data)
     
-    def patch(self, request, pk):
+    def put(self, request, pk):
         consumable = get_object_or_404(Consumable, pk=pk)
         # Check the mango's owner against the user making this request
         if request.user != consumable.owner:
             raise PermissionDenied('Unauthorized, you do not own this consumable')
         # Ensure the owner field is set to the current user's ID
         request.data['owner'] = request.user.id
-        updated_consumable = ConsumableSerializer(consumable, data=request.data, partial=True)
+        updated_consumable = ConsumableSerializer(consumable, data=request.data)
         if updated_consumable.is_valid():
             updated_consumable.save()
             return Response(updated_consumable.data)

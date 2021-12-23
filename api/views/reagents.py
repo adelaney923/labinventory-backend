@@ -39,14 +39,14 @@ class ReagentView(APIView):
         data = ReagentSerializer(reagent).data
         return Response(data)
     
-    def patch(self, request, pk):
+    def put(self, request, pk):
         reagent = get_object_or_404(Reagent, pk=pk)
         # Check the mango's owner against the user making this request
         if request.user != reagent.owner:
             raise PermissionDenied('Unauthorized, you do not own this reagent')
         # Ensure the owner field is set to the current user's ID
         request.data['owner'] = request.user.id
-        updated_reagent = ReagentSerializer(reagent, data=request.data, partial=True)
+        updated_reagent = ReagentSerializer(reagent, data=request.data)
         if updated_reagent.is_valid():
             updated_reagent.save()
             return Response(updated_reagent.data)

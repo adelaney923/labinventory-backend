@@ -39,14 +39,14 @@ class CalibratorView(APIView):
         data = CalibratorSerializer(calibrator).data
         return Response(data)
     
-    def patch(self, request, pk):
+    def put(self, request, pk):
         calibrator = get_object_or_404(Calibrator, pk=pk)
         # Check the mango's owner against the user making this request
         if request.user != calibrator.owner:
             raise PermissionDenied('Unauthorized, you do not own this calibrator')
         # Ensure the owner field is set to the current user's ID
         request.data['owner'] = request.user.id
-        updated_calibrator = CalibratorSerializer(calibrator, data=request.data, partial=True)
+        updated_calibrator = CalibratorSerializer(calibrator, data=request.data)
         if updated_calibrator.is_valid():
             updated_calibrator.save()
             return Response(updated_calibrator.data)
