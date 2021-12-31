@@ -13,6 +13,7 @@ django-environ = "*"
 whitenoise = "*"
 django-heroku = "*"
 django-cors-headers = "*"
+django-on-heroku = "*"
 
 [dev-packages]
 
